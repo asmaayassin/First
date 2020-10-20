@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1599392564858">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" schemaLocation="/get contract/GetContract.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1599392564858" location="/NewWsdl/WSDL.wsdl"/>
+    <pd:name>get contract/getContractwsdl.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx2:GetContractRequest"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx2:gerContractRespons>
+            <part1>
+                <xsl:copy-of select="$Call-Process/pfx:Response"/>
+            </part1>
+        </pfx2:gerContractRespons>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx2:gerContractRespons"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1600004826895</pd:targetNamespace>
+    <pd:activity name="Call Process">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>297</pd:x>
+        <pd:y>68</pd:y>
+        <config>
+            <processName>/get contract/Getcontract.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx:Request>
+                <xsl:copy-of select="$Start/pfx2:GetContractRequest/part1/pfx:Request/pfx:Header"/>
+                <xsl:copy-of select="$Start/pfx2:GetContractRequest/part1/pfx:Request/pfx:Body"/>
+            </pfx:Request>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Call Process</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call Process</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

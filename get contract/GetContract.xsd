@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/first project/get contract/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/first project/get contract/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RequestId" type="xs:string" minOccurs="0"/>
+							<xs:element name="Channal" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Body" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+							<xs:element name="co_id" type="xs:string" minOccurs="0"/>
+							<xs:element name="co_id_pub" type="xs:string" minOccurs="0"/>
+							<xs:element name="cs_id" type="xs:string" minOccurs="0"/>
+							<xs:element name="cs_id_pub" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="error_code" type="xs:string" minOccurs="0"/>
+							<xs:element name="msg" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Body" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="co_id" type="xs:string" minOccurs="0"/>
+							<xs:element name="Co_id_pop" type="xs:string" minOccurs="0"/>
+							<xs:element name="CS_PENDING_STATE" type="xs:string" minOccurs="0"/>
+							<xs:element name="PROFILE_ID" type="xs:string" minOccurs="0"/>
+							<xs:element name="SPCODE" type="xs:string" minOccurs="0"/>
+							<xs:element name="SPCODE_PUB" type="xs:string" minOccurs="0"/>
+							<xs:element name="CO_REQ_PENDING" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

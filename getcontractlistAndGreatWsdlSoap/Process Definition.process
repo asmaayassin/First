@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" schemaLocation="/getcontractlistAndGreatWsdlSoap/schama/Schema.xsd"/>
+    <pd:name>getcontractlistAndGreatWsdlSoap/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx:Get_Contract_List>
+            <xsl:for-each select="$JDBC-Call-Get-Contract-List-Procedure/resultSet/outputSet/CONTRACTS/Parameter">
+                <pfx:Contracts>
+                    <pfx:co_ID>
+                        <xsl:value-of select="CO_ID"/>
+                    </pfx:co_ID>
+                    <xsl:if test="not((CO_ID_PUB/@xsi:nil=(&quot;true&quot;)) or (CO_ID_PUB/@xsi:nil=(&quot;1&quot;)))">
+                        <pfx:co_id_pup>
+                            <xsl:value-of select="CO_ID_PUB"/>
+                        </pfx:co_id_pup>
+                    </xsl:if>
+                    <xsl:for-each select="Parameter">
+                        <pfx:services>
+                            <pfx:profile_id>
+                                <xsl:value-of select="PROFILE_ID"/>
+                            </pfx:profile_id>
+                            <pfx:SPCODE_PUB>
+                                <xsl:value-of select="SPCODE_PUB"/>
+                            </pfx:SPCODE_PUB>
+                            <pfx:CO_REQ_PENDING>
+                                <xsl:value-of select="CO_REQ_PENDING"/>
+                            </pfx:CO_REQ_PENDING>
+                            <pfx:SNCODE>
+                                <xsl:value-of select="SNCODE"/>
+                            </pfx:SNCODE>
+                            <pfx:SNCODE_PUB>
+                                <xsl:value-of select="SNCODE_PUB"/>
+                            </pfx:SNCODE_PUB>
+                            <pfx:CO_SN_STATUS>
+                                <xsl:value-of select="CO_SN_STATUS"/>
+                            </pfx:CO_SN_STATUS>
+                        </pfx:services>
+                    </xsl:for-each>
+                </pfx:Contracts>
+            </xsl:for-each>
+        </pfx:Get_Contract_List>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:Get_Contract_List"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1597833194189</pd:targetNamespace>
+    <pd:activity name="JDBC Call Get Contract List Procedure">
+        <pd:type>com.tibco.plugin.jdbc.JDBCCallActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCCallActivity</pd:resourceType>
+        <pd:x>294</pd:x>
+        <pd:y>80</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Tibco.sharedjdbc</jdbcSharedConfig>
+            <schema>TIBCO</schema>
+            <ProcedureName>GET_CONTRACT_LIST</ProcedureName>
+            <oraObjects>
+                <TIBCO.SERVICE>
+                    <CS_PENDING_STATE>
+                        <attributeType>2</attributeType>
+                        <attributeName>CS_PENDING_STATE</attributeName>
+                    </CS_PENDING_STATE>
+                    <PROFILE_ID>
+                        <attributeType>2</attributeType>
+                        <attributeName>PROFILE_ID</attributeName>
+                    </PROFILE_ID>
+                    <SPCODE>
+                        <attributeType>2</attributeType>
+                        <attributeName>SPCODE</attributeName>
+                    </SPCODE>
+                    <SPCODE_PUB>
+                        <attributeType>12</attributeType>
+                        <attributeName>SPCODE_PUB</attributeName>
+                    </SPCODE_PUB>
+                    <CO_REQ_PENDING>
+                        <attributeType>2</attributeType>
+                        <attributeName>CO_REQ_PENDING</attributeName>
+                    </CO_REQ_PENDING>
+                    <SNCODE>
+                        <attributeType>2</attributeType>
+                        <attributeName>SNCODE</attributeName>
+                    </SNCODE>
+                    <SNCODE_PUB>
+                        <attributeType>12</attributeType>
+                        <attributeName>SNCODE_PUB</attributeName>
+                    </SNCODE_PUB>
+                    <CO_SN_STATUS>
+                        <attributeType>2</attributeType>
+                        <attributeName>CO_SN_STATUS</attributeName>
+                    </CO_SN_STATUS>
+                </TIBCO.SERVICE>
+                <TIBCO.CONTRACT>
+                    <CO_ID>
+                        <attributeType>2</attributeType>
+                        <attributeName>CO_ID</attributeName>
+                    </CO_ID>
+                    <CO_ID_PUB>
+                        <attributeType>12</attributeType>
+                        <attributeName>CO_ID_PUB</attributeName>
+                    </CO_ID_PUB>
+                    <SERIVCES>
+                        <attributeType>2003</attributeType>
+                        <attributeName>TIBCO.SERVICE_TABLE_LIST</attributeName>
+                    </SERIVCES>
+                </TIBCO.CONTRACT>
+            </oraObjects>
+            <oraTables>
+                <TIBCO.SERVICE_TABLE_LIST>
+                    <attributeType>2002</attributeType>
+                    <attributeName>TIBCO.SERVICE</attributeName>
+                </TIBCO.SERVICE_TABLE_LIST>
+                <TIBCO.CONTRACT_TABLE_LIST>
+                    <attributeType>2002</attributeType>
+                    <attributeName>TIBCO.CONTRACT</attributeName>
+                </TIBCO.CONTRACT_TABLE_LIST>
+            </oraTables>
+            <parameterTypes>
+                <parameter>
+                    <colName>CONTRACTS</colName>
+                    <colType>4</colType>
+                    <dataType>-35</dataType>
+                    <typeName>CONTRACT_TABLE_LIST</typeName>
+                </parameter>
+            </parameterTypes>
+        </config>
+        <pd:inputBindings>
+            <inputs/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Call Get Contract List Procedure</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Call Get Contract List Procedure</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

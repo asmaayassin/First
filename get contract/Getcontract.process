@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" schemaLocation="/get contract/GetContract.xsd"/>
+    <pd:name>get contract/Getcontract.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:Request"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <xsl:copy-of select="$respons_var/pfx:Response"/>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:Response"/>
+    <pd:endX>628</pd:endX>
+    <pd:endY>92</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <respons_var ref="pfx:Response"/>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1597745628780</pd:targetNamespace>
+    <pd:activity name="JDBC Call Procedure">
+        <pd:type>com.tibco.plugin.jdbc.JDBCCallActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCCallActivity</pd:resourceType>
+        <pd:x>284</pd:x>
+        <pd:y>77</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Tibco.sharedjdbc</jdbcSharedConfig>
+            <schema>tibco</schema>
+            <ProcedureName>GET_CONTRACT</ProcedureName>
+            <oraObjects/>
+            <oraTables/>
+            <parameterTypes>
+                <parameter>
+                    <colName>MSISDN</colName>
+                    <colType>1</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>CO_ID</colName>
+                    <colType>1</colType>
+                    <dataType>2</dataType>
+                    <typeName>NUMBER</typeName>
+                </parameter>
+                <parameter>
+                    <colName>CO_ID_PUB</colName>
+                    <colType>1</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>CS_ID</colName>
+                    <colType>1</colType>
+                    <dataType>2</dataType>
+                    <typeName>NUMBER</typeName>
+                </parameter>
+                <parameter>
+                    <colName>CS_ID_PUB</colName>
+                    <colType>1</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>CONTRACT_DETAILS</colName>
+                    <colType>4</colType>
+                    <dataType>-37</dataType>
+                    <typeName>CONTRACT</typeName>
+                </parameter>
+                <parameter>
+                    <colName>ERROR_CODE</colName>
+                    <colType>4</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>ERROR_MSG</colName>
+                    <colType>4</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+            </parameterTypes>
+        </config>
+        <pd:inputBindings>
+            <inputs>
+                <inputSet>
+                    <MSISDN>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:Request/pfx:Body/pfx:msisdn)">
+                                <xsl:value-of select="$Start/pfx:Request/pfx:Body/pfx:msisdn"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </MSISDN>
+                    <CO_ID>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:Request/pfx:Body/pfx:co_id)">
+                                <xsl:value-of select="$Start/pfx:Request/pfx:Body/pfx:co_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </CO_ID>
+                    <CO_ID_PUB>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:Request/pfx:Body/pfx:co_id_pub)">
+                                <xsl:value-of select="$Start/pfx:Request/pfx:Body/pfx:co_id_pub"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </CO_ID_PUB>
+                    <CS_ID>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:Request/pfx:Body/pfx:cs_id)">
+                                <xsl:value-of select="$Start/pfx:Request/pfx:Body/pfx:cs_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </CS_ID>
+                    <CS_ID_PUB>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:Request/pfx:Body/pfx:cs_id_pub)">
+                                <xsl:value-of select="$Start/pfx:Request/pfx:Body/pfx:cs_id_pub"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </CS_ID_PUB>
+                </inputSet>
+            </inputs>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign_fail">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>445</pd:x>
+        <pd:y>155</pd:y>
+        <config>
+            <variableName>respons_var</variableName>
+        </config>
+        <pd:inputBindings>
+            <pfx:Response>
+                <pfx:Header>
+                    <pfx:error_code>
+                        <xsl:value-of select="'404'"/>
+                    </pfx:error_code>
+                    <pfx:msg>
+                        <xsl:value-of select="'Fail'"/>
+                    </pfx:msg>
+                </pfx:Header>
+            </pfx:Response>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign-success">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:description/>
+        <pd:x>464</pd:x>
+        <pd:y>41</pd:y>
+        <config>
+            <variableName>respons_var</variableName>
+        </config>
+        <pd:inputBindings>
+            <pfx:Response>
+                <pfx:Header>
+                    <pfx:error_code>
+                        <xsl:value-of select="'1'"/>
+                    </pfx:error_code>
+                    <pfx:msg>
+                        <xsl:value-of select="'success'"/>
+                    </pfx:msg>
+                </pfx:Header>
+            </pfx:Response>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Call Procedure</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Call Procedure</pd:from>
+        <pd:to>Assign-success</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$JDBC-Call-Procedure/resultSet/outputSet/ERROR_CODE='0'</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Call Procedure</pd:from>
+        <pd:to>Assign_fail</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign-success</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign_fail</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

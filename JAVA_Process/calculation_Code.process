@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>JAVA_Process/calculation_Code.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="param2" type="xsd:string"/>
+                    <xsd:element name="param1" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <Out_put>
+            <result>
+                <xsl:value-of select="$Java-Code/javaCodeActivityOutput/result"/>
+            </result>
+        </Out_put>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="Out_put">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="result" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1601804994844</pd:targetNamespace>
+    <pd:activity name="Java Code">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>307</pd:x>
+        <pd:y>71</pd:y>
+        <config>
+            <fullsource>package JAVA_Process.calculation_Code;
+import java.util.*;
+import java.io.*;
+public class calculation_CodeJavaCode{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected double a = 0.0d;
+	protected double b = 0.0d;
+	protected double result = 0.0d;
+	public double geta() {
+		return a;
+	}
+	public void seta(double val) {
+		a = val;
+	}
+	public double getb() {
+		return b;
+	}
+	public void setb(double val) {
+		b = val;
+	}
+	public double getresult() {
+		return result;
+	}
+	public void setresult(double val) {
+		result = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public calculation_CodeJavaCode() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : double a
+	In  : double b
+	Out : double result
+* Available Variables: DO NOT MODIFY *****/
+double res=geta()+ getb();
+setresult(res);}
+}
+</fullsource>
+            <fileName>calculation_CodeJavaCode</fileName>
+            <packageName>JAVA_Process.calculation_Code</packageName>
+            <outputData>
+                <row>
+                    <fieldName>result</fieldName>
+                    <fieldType>double</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+            </outputData>
+            <inputData>
+                <row>
+                    <fieldName>a</fieldName>
+                    <fieldType>double</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>b</fieldName>
+                    <fieldType>double</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+            </inputData>
+            <byteCode>
+                <class>
+                    <name>calculation_CodeJavaCode</name>
+                    <byteCode>yv66vgAAADQAKQkACAAfCQAIACAJAAgAIQoACQAiCgAIACMKAAgAJAoACAAlBwAmBwAnAQABYQEAAUQBAAFiAQAGcmVzdWx0AQAEZ2V0YQEAAygpRAEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAARzZXRhAQAEKEQpVgEABGdldGIBAARzZXRiAQAJZ2V0cmVzdWx0AQAJc2V0cmVzdWx0AQAGPGluaXQ+AQADKClWAQAGaW52b2tlAQAKRXhjZXB0aW9ucwcAKAEAClNvdXJjZUZpbGUBAB1jYWxjdWxhdGlvbl9Db2RlSmF2YUNvZGUuamF2YQwACgALDAAMAAsMAA0ACwwAGAAZDAAOAA8MABQADwwAFwATAQA2SkFWQV9Qcm9jZXNzL2NhbGN1bGF0aW9uX0NvZGUvY2FsY3VsYXRpb25fQ29kZUphdmFDb2RlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24AIQAIAAkAAAADAAQACgALAAAABAAMAAsAAAAEAA0ACwAAAAgAAQAOAA8AAQAQAAAAHQACAAEAAAAFKrQAAa8AAAABABEAAAAGAAEAAAAKAAEAEgATAAEAEAAAACIAAwADAAAABiontQABsQAAAAEAEQAAAAoAAgAAAA0ABQAOAAEAFAAPAAEAEAAAAB0AAgABAAAABSq0AAKvAAAAAQARAAAABgABAAAAEAABABUAEwABABAAAAAiAAMAAwAAAAYqJ7UAArEAAAABABEAAAAKAAIAAAATAAUAFAABABYADwABABAAAAAdAAIAAQAAAAUqtAADrwAAAAEAEQAAAAYAAQAAABYAAQAXABMAAQAQAAAAIgADAAMAAAAGKie1AAOxAAAAAQARAAAACgACAAAAGQAFABoAAQAYABkAAQAQAAAAPAADAAEAAAAUKrcABCoOtQABKg61AAIqDrUAA7EAAAABABEAAAAWAAUAAAAcAAQABgAJAAcADgAIABMAHQABABoAGQACABAAAAAsAAQAAwAAABAqtgAFKrYABmNIKie2AAexAAAAAQARAAAACgACAAAAJAAKACUAGwAAAAQAAQAcAAEAHQAAAAIAHg==</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <a>
+                    <xsl:value-of select="$Start/root/param1"/>
+                </a>
+                <b>
+                    <xsl:value-of select="$Start/root/param2"/>
+                </b>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Java Code</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Java Code</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

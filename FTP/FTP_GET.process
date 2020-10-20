@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+    <pd:name>FTP/FTP_GET.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>453</pd:endX>
+    <pd:endY>60</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1602065724809</pd:targetNamespace>
+    <pd:activity name="FTP Get">
+        <pd:type>com.tibco.plugin.ftp.FTPGetActivity</pd:type>
+        <pd:resourceType>ae.activities.FTPGetActivityUI</pd:resourceType>
+        <pd:x>315</pd:x>
+        <pd:y>59</pd:y>
+        <config>
+            <Timeout>120000</Timeout>
+            <isBinary>false</isBinary>
+            <Overwrite>true</Overwrite>
+            <useProcessData>false</useProcessData>
+            <SharedUserData>/FTP/FTP Connection.sharedftp</SharedUserData>
+        </config>
+        <pd:inputBindings>
+            <FTPGetInputDataFile>
+                <RemoteFileName>
+                    <xsl:value-of select="'test_tibco/file.txt'"/>
+                </RemoteFileName>
+                <LocalFileName>
+                    <xsl:value-of select="'D:\file.txt'"/>
+                </LocalFileName>
+            </FTPGetInputDataFile>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>FTP Get</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>FTP Get</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

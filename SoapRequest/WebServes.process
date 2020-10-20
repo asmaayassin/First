@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://www.tibco.com/schemas/first project/SoapRequest/Schema.xsd" xmlns:pfx3="http://www.tibco.com/schemas/first project/SoapRequest/Schema.xsd2" xmlns:pfx4="http://www.tibco.com/schemas/firstproject/SoapRequest/Schema.xsd2" xmlns:pfx5="http://www.tibco.com/schemas/firstproject/SoapRequest/Schema1.xsd">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/first project/SoapRequest/Schema.xsd" schemaLocation="/SoapRequest/AddReq.xsd"/>
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/firstproject/SoapRequest/Schema.xsd2" schemaLocation="/SoapRequest/Schema.xsd"/>
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/firstproject/SoapRequest/Schema1.xsd" schemaLocation="/SoapRequest/RequestRespond.xsd"/>
+    <wsdl:import namespace="http://tempuri.org/" location="/SoapRequest/calculator.wsdl"/>
+    <pd:name>SoapRequest/WebServes.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx5:Request"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx5:Respond>
+            <pfx5:Header>
+                <pfx5:code>
+                    <xsl:value-of select="'0'"/>
+                </pfx5:code>
+                <pfx5:msg>
+                    <xsl:value-of select="'sucess'"/>
+                </pfx5:msg>
+            </pfx5:Header>
+            <pfx5:Body>
+                <pfx5:result>
+                    <xsl:value-of select="$SOAPRequestReply/outputMessage/pfx:DivideResponse/pfx:DivideResult"/>
+                </pfx5:result>
+            </pfx5:Body>
+        </pfx5:Respond>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx5:Respond"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1598353980084</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>pfx:Calculator</service>
+            <servicePort>CalculatorSoap</servicePort>
+            <operation>Divide</operation>
+            <soapAction>http://tempuri.org/Divide</soapAction>
+            <endpointURL>http://www.dneonline.com/calculator.asmx</endpointURL>
+            <authScheme>NONE</authScheme>
+        </config>
+        <pd:inputBindings>
+            <inputMessage>
+                <pfx:Divide>
+                    <pfx:intA>
+                        <xsl:value-of select="$Start/pfx5:Request/pfx5:Body/pfx5:num1"/>
+                    </pfx:intA>
+                    <pfx:intB>
+                        <xsl:value-of select="$Start/pfx5:Request/pfx5:Body/pfx5:num2"/>
+                    </pfx:intB>
+                </pfx:Divide>
+            </inputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

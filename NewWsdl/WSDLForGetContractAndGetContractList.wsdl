@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" xmlns:tns="http://xmlns.example.com/1599392564858" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" targetNamespace="http://xmlns.example.com/1599392564858">
+    <import namespace="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" location="../getcontractlist/schama/Schema.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/first project/get contract/Schema.xsd" location="../get contract/GetContract.xsd"/>
+    <message name="GetContractListRequest">
+        <part name="Request" element="ns:Get_Contract_List_Request"/>
+    </message>
+    <message name="GetContractListRespond">
+        <part name="Respond" element="ns:Get_Contract_List"/>
+    </message>
+    <message name="gerContractRespons">
+        <part name="part1" element="ns2:Response"/>
+    </message>
+    <message name="GetContractRequest">
+        <part name="part1" element="ns2:Request"/>
+    </message>
+    <portType name="PortType">
+        <operation name="GetContractList">
+            <input message="tns:GetContractListRequest"/>
+            <output message="tns:GetContractListRespond"/>
+        </operation>
+        <operation name="GetContract">
+            <input message="tns:GetContractRequest"/>
+            <output message="tns:gerContractRespons"/>
+        </operation>
+    </portType>
+</definitions>

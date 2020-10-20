@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>FTP Connection</name>
+    <resourceType>ae.shared.FTPuserChannel</resourceType>
+    <config>
+        <Timeout>60000</Timeout>
+        <Port>21</Port>
+        <Encoding>Cp1252</Encoding>
+        <FireWall>false</FireWall>
+        <Mode>Passive</Mode>
+        <Host>ftp.karimsherif.com</Host>
+        <UserName>tibco@tibco.karimsherif.com</UserName>
+        <Password>#!S1QjPxRkgSc5PS8jsKPCGA63tqv1kH/r5lDkcBaUoWg=</Password>
+    </config>
+</BWSharedResource>

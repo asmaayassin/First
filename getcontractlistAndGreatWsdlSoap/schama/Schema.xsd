@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Get_Contract_List">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Contracts" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="co_ID" type="xs:string" minOccurs="0"/>
+							<xs:element name="co_id_pup" type="xs:string" minOccurs="0"/>
+							<xs:element name="services" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="cs_pending" type="xs:string" minOccurs="0"/>
+										<xs:element name="profile_id" type="xs:string" minOccurs="0"/>
+										<xs:element name="spcope" type="xs:string" minOccurs="0"/>
+										<xs:element name="SPCODE_PUB" type="xs:string" minOccurs="0"/>
+										<xs:element name="CO_REQ_PENDING" type="xs:string" minOccurs="0"/>
+										<xs:element name="SNCODE" type="xs:string" minOccurs="0"/>
+										<xs:element name="SNCODE_PUB" type="xs:string" minOccurs="0"/>
+										<xs:element name="CO_SN_STATUS" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Get_Contract_List_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Channal" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

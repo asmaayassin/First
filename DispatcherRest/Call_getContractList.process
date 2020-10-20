@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/json" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.tibco.com/schemas/first project/getcontractlist/schama/Schema.xsd" schemaLocation="/getcontractlistAndGreatWsdlSoap/schama/Schema.xsd"/>
+    <pd:name>DispatcherRest/Call_getContractList.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>120</pd:startX>
+    <pd:startY>69</pd:startY>
+    <pd:returnBindings>
+        <Content>
+            <xsl:value-of select="$Render-JSON/ns:ActivityOutputClass/jsonString"/>
+        </Content>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="Content" type="xsd:string"/>
+    </pd:endType>
+    <pd:endX>529</pd:endX>
+    <pd:endY>60</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1601377563388</pd:targetNamespace>
+    <pd:activity name="Call Process">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>285</pd:x>
+        <pd:y>73</pd:y>
+        <config>
+            <processName>/getcontractlistAndGreatWsdlSoap/Process Definition.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Render JSON">
+        <pd:type>com.tibco.plugin.json.activities.JSONRenderActivity</pd:type>
+        <pd:resourceType>ae.activities.JSONRenderActivity</pd:resourceType>
+        <pd:x>428</pd:x>
+        <pd:y>69</pd:y>
+        <config>
+            <SchemaType>xsdType</SchemaType>
+            <BadgerfishCheck>false</BadgerfishCheck>
+            <ActivityInputEditor ref="pfx:Get_Contract_List"/>
+        </config>
+        <pd:inputBindings>
+            <xsl:for-each select="$Call-Process/pfx:Get_Contract_List">
+                <ns:ActivityInputClass>
+                    <pfx:Get_Contract_List>
+                        <xsl:for-each select="pfx:Contracts">
+                            <pfx:Contracts>
+                                <xsl:if test="pfx:co_ID">
+                                    <pfx:co_ID>
+                                        <xsl:value-of select="pfx:co_ID"/>
+                                    </pfx:co_ID>
+                                </xsl:if>
+                                <xsl:if test="pfx:co_id_pup">
+                                    <pfx:co_id_pup>
+                                        <xsl:value-of select="pfx:co_id_pup"/>
+                                    </pfx:co_id_pup>
+                                </xsl:if>
+                                <xsl:for-each select="pfx:services">
+                                    <pfx:services>
+                                        <xsl:if test="pfx:cs_pending">
+                                            <pfx:cs_pending>
+                                                <xsl:value-of select="pfx:cs_pending"/>
+                                            </pfx:cs_pending>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:profile_id">
+                                            <pfx:profile_id>
+                                                <xsl:value-of select="pfx:profile_id"/>
+                                            </pfx:profile_id>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:spcope">
+                                            <pfx:spcope>
+                                                <xsl:value-of select="pfx:spcope"/>
+                                            </pfx:spcope>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:SPCODE_PUB">
+                                            <pfx:SPCODE_PUB>
+                                                <xsl:value-of select="pfx:SPCODE_PUB"/>
+                                            </pfx:SPCODE_PUB>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:CO_REQ_PENDING">
+                                            <pfx:CO_REQ_PENDING>
+                                                <xsl:value-of select="pfx:CO_REQ_PENDING"/>
+                                            </pfx:CO_REQ_PENDING>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:SNCODE">
+                                            <pfx:SNCODE>
+                                                <xsl:value-of select="pfx:SNCODE"/>
+                                            </pfx:SNCODE>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:SNCODE_PUB">
+                                            <pfx:SNCODE_PUB>
+                                                <xsl:value-of select="pfx:SNCODE_PUB"/>
+                                            </pfx:SNCODE_PUB>
+                                        </xsl:if>
+                                        <xsl:if test="pfx:CO_SN_STATUS">
+                                            <pfx:CO_SN_STATUS>
+                                                <xsl:value-of select="pfx:CO_SN_STATUS"/>
+                                            </pfx:CO_SN_STATUS>
+                                        </xsl:if>
+                                    </pfx:services>
+                                </xsl:for-each>
+                            </pfx:Contracts>
+                        </xsl:for-each>
+                    </pfx:Get_Contract_List>
+                </ns:ActivityInputClass>
+            </xsl:for-each>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Call Process</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Call Process</pd:from>
+        <pd:to>Render JSON</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Render JSON</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

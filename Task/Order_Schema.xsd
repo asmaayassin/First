@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/first project/Task/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/first project/Task/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RequestId" type="xs:string" minOccurs="0"/>
+							<xs:element name="Channal" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Body" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ship_to_country" type="xs:string" minOccurs="0"/>
+							<xs:element name="Total_price" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="error_code" type="xs:string" minOccurs="0"/>
+							<xs:element name="msg" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Body" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="max_purchase_price" type="xs:string" minOccurs="0"/>
+							<xs:element name="Shiping_cost" type="xs:string" minOccurs="0"/>
+							<xs:element name="region" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
